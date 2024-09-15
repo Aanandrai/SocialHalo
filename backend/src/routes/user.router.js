@@ -13,11 +13,11 @@ router.route("/login")
 
 
 router.route("/logout")
-    .post(logout)
+    .get(logout)
 
 
 router.route("/getOtherUser")
-.post(isAuthenticaed , getOtherUsers)
+.get(isAuthenticaed , getOtherUsers)
 
 
 export default router
