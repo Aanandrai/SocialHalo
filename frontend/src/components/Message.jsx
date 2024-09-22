@@ -1,6 +1,6 @@
 import React from "react";
 
-const Message = () => {
+const Message = ({message}) => {
   return (
     <div>
       <div className="chat chat-start">
@@ -16,7 +16,7 @@ const Message = () => {
           Obi-Wan Kenobi
           <time className="text-xs opacity-50 text-slate-900">12:45</time>
         </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
+        <div className="chat-bubble">{message?.message}</div>
         
       </div>
     </div>

@@ -1,18 +1,37 @@
 import React,{ useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setAuthUser } from "../redux/userSlice";
+import toast from "react-hot-toast";
 
 function Signup() {
   const [user, setUser] = useState({
-    
     username: "",
     password: "",
   });
+  const dispatch =useDispatch();
+  const navigate =useNavigate();
   
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async(e) => {
     e.preventDefault();
-    console.log(user);
-  setUser({username: "",
-    password: "",})
+    try {
+      const res= await axios.post(``,user,{
+        headers:{
+          'Content-Type':'application/json'
+        },
+        withCredentials:true
+      });
+      navigate("/");
+      dispatch(setAuthUser(res.data))
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    }
+  setUser({
+    username: "",
+    password: "",
+  })
     
     
   };
