@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{
+  background:url(../public/—Pngtree—doodle\ dialog\ chat\ dialog_1474797.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
