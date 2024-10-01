@@ -24,7 +24,7 @@ const Sildebar = () => {
     }
     const searchSubmitHandler=(e)=>{
       e.preventDefault();
-      const conversationUser=otherUsers?.find((user)=>fullName.toLowerCase().includes(search.toLowerCase()));
+      const conversationUser=otherUsers?.find((user)=>user?.toLowerCase().includes(search.toLowerCase()));
       if(conversationUser){
         dispatch(setOtherUsers([conversationUser]));
       }else{

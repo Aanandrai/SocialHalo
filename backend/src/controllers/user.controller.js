@@ -4,6 +4,7 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 import {User} from "../models/user.model.js"
 
 export const register=asyncHandler(async(req,res)=>{
+   
 
     const {fullName,email,password , confirmPassword ,gender}=req.body 
  

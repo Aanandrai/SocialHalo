@@ -4,34 +4,44 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/userSlice";
 import toast from "react-hot-toast";
+import {BASE_URL} from "../config"
 
 function Signup() {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+
   const dispatch =useDispatch();
   const navigate =useNavigate();
   
   const onSubmitHandler = async(e) => {
     e.preventDefault();
     try {
-      const res= await axios.post(``,user,{
+      const res= await axios.post(`${BASE_URL}/user/login`,user,{
         headers:{
           'Content-Type':'application/json'
         },
         withCredentials:true
       });
+
+      if(res.data.success){
       navigate("/");
       dispatch(setAuthUser(res.data))
-    } catch (error) {
+      }
+
+    }
+    
+    catch (error) {
       toast.error(error.response.data.message);
       console.log(error);
     }
-  setUser({
-    username: "",
-    password: "",
-  })
+
+
+    setUser({
+      username: "",
+      password: "",
+    })
     
     
   };
