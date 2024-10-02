@@ -24,15 +24,17 @@ const Sidebar = () => {
             console.log(error);
         }
     }
+
     const searchSubmitHandler=(e)=>{
       e.preventDefault();
-      const conversationUser=otherUsers?.find((user)=>user?.toLowerCase().includes(search.toLowerCase()));
+      const conversationUser=otherUsers?.find((user)=>user?.fullName?.toLowerCase().includes(search.toLowerCase()));
       if(conversationUser){
         dispatch(setOtherUsers([conversationUser]));
       }else{
         toast.error("User not found");
       }
     }
+
   return (
     <div className='border-r border-slate-500 p-4 flex flex-col'>
       <form onSubmit={searchSubmitHandler} action="" className='flex items-center gap-2'>

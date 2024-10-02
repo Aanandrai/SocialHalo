@@ -18,7 +18,6 @@ const Message = ({message}) => {
           </div>
         </div>
         <div className="chat-header text-slate-900">
-          Obi-Wan Kenobi
           <time className="text-xs opacity-50 text-slate-900">12:45</time>
         </div>
         <div className="chat-bubble">{message?.message}</div>
