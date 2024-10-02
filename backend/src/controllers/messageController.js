@@ -45,5 +45,5 @@ export const getMessage=asyncHandler(async(req,res)=>{
         participants:{$all :[senderId, receiverId]}
     }).populate("messages")
 
-    return res.status.json(new ApiResponse(200, conversation,"get message successfull"))
+    return res.status(200).json(new ApiResponse(200, conversation,"get message successfull"))
 })

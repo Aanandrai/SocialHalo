@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const OtherUsers = () => {
   useGetOtherUser();
   const { otherUsers } = useSelector((store) => store.user);
+  
   if (!otherUsers) {
     return;
   }
@@ -14,15 +15,7 @@ const OtherUsers = () => {
       {otherUsers?.map((user) => {
         return <OtherUser key={user._id} user={user} />;
       })}
-      {/* <OtherUser />
-      <OtherUser />
-      <OtherUser />
-      <OtherUser />
-      <OtherUser />
-      <OtherUser />
-      <OtherUser />
-      <OtherUser />
-      <OtherUser /> */}
+     
     </div>
   );
 };

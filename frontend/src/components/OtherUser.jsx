@@ -9,8 +9,8 @@ const OtherUser = ({user}) => {
         dispatch(setSelectedUser(user));
     }
   return (
-    <div>
-      <div onClick={()=>selectedUserHandler(user)} className={`${selectedUser?._id===user?._id?'bg-zinc-500':''}flex gap-2 items-center hover:bg-zinc-500 rounded-sm p-2 cursor-pointer`}>
+    <>
+      <div onClick={()=>selectedUserHandler(user)} className={`${selectedUser?._id===user?._id?'bg-zinc-500':''} flex gap-2 items-center hover:bg-zinc-500 rounded-sm p-2 cursor-pointer`}>
         <div className="avatar online">
           <div className="w-10 rounded-full">
             <img
@@ -19,14 +19,14 @@ const OtherUser = ({user}) => {
             />
           </div>
         </div>
-        <div className=" ">
-          <div className="">
+        <div className="flex flex-col flex-1">
+          <div className="flex justify-between items-center gap-2 flex-1">
             <p className="text-gray-800">{user?.fullName}</p>
           </div>
         </div>
       </div>
       <div className="divider my-0 py-0 h-1"></div>
-    </div>
+    </>
   )
 }
 

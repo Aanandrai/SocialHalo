@@ -6,16 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOtherUsers } from '../redux/userSlice';
+import {BASE_URL} from "../config"
 
 
-const Sildebar = () => {
+const Sidebar = () => {
   const {otherUsers}=useSelector(store=>store.user);
   const dispatch=useDispatch();
   const[search,setSearch]=useState("");
     const navigate =useNavigate();
+
     const logoutHandler=async()=>{
         try {
-            const res=await axios.get(``);
+            const res=await axios.get(`${BASE_URL}/user/logout`);
             navigate("/login");
             toast.success(res.data.message);
         } catch (error) {
@@ -46,4 +48,4 @@ const Sildebar = () => {
   )
 }
 
-export default Sildebar
+export default Sidebar

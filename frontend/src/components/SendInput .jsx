@@ -3,10 +3,12 @@ import { IoSend } from "react-icons/io5";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessages } from "../redux/messageSlice";
+import {BASE_URL} from "../config"
+
 
 const SendInput = () => {
  
-  const {message,setMessage}=useState("");
+  const [message,setMessage]=useState("");
   const dispatch=useDispatch();
   const {selectedUser}=useSelector(store=>store.user);
   const {messages}=useSelector(store=>store.message);
@@ -14,18 +16,19 @@ const SendInput = () => {
   const onSubmitHandler=async(e)=>{
     e.preventDefault();
     try {
-      const res=await axios.post(``,{message},{
+      const res=await axios.post(`${BASE_URL}/message/send/${selectedUser?._id}`, {message}, {
         headers:{
-          'Content-Type':'application.json'
+          'Content-Type':'application/json'
         },
         withCredentials:true
-      });//${selectedUser?._.id};
-      dispatch(setMessages([...messages,res?.data?.newMessage]))
+      });
+  console.log(res.data.data.newMessage)
+      dispatch(setMessages([...messages, res?.data?.newMessage]))
       
     } catch (error) {
       console.log(error)
     }
-    setMessage('');
+    setMessage("");
   }
   return (
     <form onSubmit={onSubmitHandler} action="" className="px-4 my-3">
@@ -37,7 +40,7 @@ const SendInput = () => {
           placeholder="  Write a message..."
           className="border border-zinc-500 text-sm rounded-lg block w-full h-[40px] bg-gray-600 text-white"
         />
-        <button type="submit" className="absolute flex inset-y-0 end-0 items-center pr-3"><IoSend size={30}/></button>
+        <button type="submit" className="absolute flex inset-y-0 end-0 items-center pr-3"><IoSend/></button>
       </div>
     </form>
   );

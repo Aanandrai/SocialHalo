@@ -1,5 +1,5 @@
 import React,{ useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/userSlice";
@@ -8,7 +8,7 @@ import {BASE_URL} from "../config"
 
 function Signup() {
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -24,10 +24,11 @@ function Signup() {
         },
         withCredentials:true
       });
-
+     
       if(res.data.success){
       navigate("/");
-      dispatch(setAuthUser(res.data))
+      toast.success(res.data.message)
+      dispatch(setAuthUser(res.data.data))
       }
 
     }
@@ -39,7 +40,7 @@ function Signup() {
 
 
     setUser({
-      username: "",
+      email: "",
       password: "",
     })
     
@@ -52,14 +53,14 @@ function Signup() {
         <form action="" onSubmit={onSubmitHandler}>
           <div>
             <label className="label p-2">
-              <span className="text-base label-text text-gray-800">Username</span>
+              <span className="text-base label-text text-gray-800">Email</span>
             </label>
             <input
               className="w-full text-gray-800 input input-border border-slate-900 h-10 bg-inherit"
-              type="text"
-              placeholder="  write username..."
-              value={user.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              type="email"
+              placeholder="  write email..."
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
           </div>
           <div>
