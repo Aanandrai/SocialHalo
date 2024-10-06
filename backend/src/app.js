@@ -2,12 +2,13 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
+import {app, server} from "./socket/socket.js"
+
 
 dotenv.config({
     path:"./.env"
 })
 
-const app=express()
 
 app.use(express.json())
 app.use(cookieParser())
@@ -27,4 +28,4 @@ import messageRouter from "./routes/message.route.js"
 
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/message",messageRouter)
-export {app}
+export {server, app}

@@ -24,17 +24,18 @@ function Signup() {
         },
         withCredentials:true
       });
-     
-      if(res.data.success){
+      
+    
+      if(res?.data?.success==true){
       navigate("/");
-      toast.success(res.data.message)
-      dispatch(setAuthUser(res.data.data))
+      toast.success(res?.data?.message)
+      dispatch(setAuthUser(res?.data?.data))
       }
 
     }
     
-    catch (error) {
-      toast.error(error.response.data.message);
+    catch (error) {      
+      toast.error(error?.response?.data?.message || "internal server error");
       console.log(error);
     }
 
