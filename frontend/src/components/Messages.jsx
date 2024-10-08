@@ -1,13 +1,15 @@
 import React from 'react'
 import Message from './Message'
 import useGetMessages from '../hooks/useGetMessages'
+import useGetRealTimeMessage from '../hooks/useGetRealTimeMessage';
 import { useSelector } from 'react-redux';
 
 const Messages = () => {
-    useGetMessages();
+    useGetMessages()
+    useGetRealTimeMessage()
     const {messages} =useSelector(store=>store.message)
    
-    if(!messages || messages==null) return;
+    // if(!messages || messages==null) return;
   return (
     <div className='px-4 flex-1 overflow-auto'>
         {

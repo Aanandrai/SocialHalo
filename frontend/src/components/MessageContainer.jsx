@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedUser } from "../redux/userSlice";
 
 const MessageContainer = () => {
-    const {selectedUser}=useSelector(store=>store.user);
+    const {selectedUser,onlineUsers}=useSelector(store=>store.user);
     const dispatch=useDispatch();
-    useEffect(()=>{
-      return()=>dispatch(setSelectedUser(null))
-    },[]);
+   
+    const isOnline=onlineUsers?.includes(selectedUser?.id)
   return (
     <>
     {

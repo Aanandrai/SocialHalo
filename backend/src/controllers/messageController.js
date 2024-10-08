@@ -2,6 +2,8 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import {Conversation} from "../models/conversation.model.js"
 import {Message} from "../models/message.model.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
+import { getReceiverSocketId ,io } from "../socket/socket.js"
+
 
 export const senderMessage=asyncHandler(async(req,res)=>{
     const senderId=req.id 
@@ -29,10 +31,20 @@ export const senderMessage=asyncHandler(async(req,res)=>{
         gotConversation.messages.push(newMessage._id)
     }
 
-    await gotConversation.save()
+    await Promise.all([gotConversation.save(), newMessage.save()])
 
-    res.status(200).json(new ApiResponse(200, gotConversation,"success"))
+  
     //Socket IO
+
+    const receiverSocketId=getReceiverSocketId(receiverId)
+    if(receiverSocketId){
+        io.to(receiverSocketId).emit("newMessage",newMessage)
+    }
+
+
+
+    res.status(200).json(new ApiResponse(200, newMessage ,"success"))
+    
 
 
 })
