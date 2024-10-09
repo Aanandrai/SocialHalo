@@ -23,8 +23,9 @@ const SendInput = () => {
         withCredentials:true
       });
       // console.log(res.data.data)
-      dispatch(setMessages([...messages, res?.data?.data?.message]))
-      console.log(messages)
+      dispatch(setMessages([...(messages || []), res?.data?.data]));
+
+      // console.log(messages)
       
     } catch (error) {
       console.log(error)

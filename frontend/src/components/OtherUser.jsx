@@ -6,9 +6,11 @@ const OtherUser = ({user}) => {
     const dispatch =useDispatch();
     const {selectedUser, onlineUsers} =useSelector(store=>store.user);
     const isOnline=onlineUsers?.includes(user._id)
+
     const selectedUserHandler=(user)=>{
         dispatch(setSelectedUser(user));
     }
+    
   return (
     <>
       <div onClick={()=>selectedUserHandler(user)} className={`${selectedUser?._id===user?._id?'bg-zinc-500':''} flex gap-2 items-center hover:bg-zinc-500 rounded-sm p-2 cursor-pointer`}>

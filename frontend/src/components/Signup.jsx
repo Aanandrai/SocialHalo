@@ -111,26 +111,24 @@ function Signup() {
               }
             />
           </div>
-          <div className="flex items-center my-3">
-            <div className="flex items-center">
-              <p className="text-gray-800">Male</p>
+          <div className='flex items-center my-4'>
+            <div className='flex items-center'>
+              <p>Male</p>
               <input
                 type="checkbox"
-                defaultChecked
                 checked={user.gender === "male"}
                 onChange={() => handleCheckbox("male")}
-                className="checkbox mx-2"
-              />
+                defaultChecked
+                className="checkbox mx-2" />
             </div>
-            <div className="flex items-center">
-              <p className="text-gray-800">Female</p>
+            <div className='flex items-center'>
+              <p>Female</p>
               <input
                 type="checkbox"
-                defaultChecked
                 checked={user.gender === "female"}
                 onChange={() => handleCheckbox("female")}
-                className="checkbox mx-2"
-              />
+                defaultChecked
+                className="checkbox mx-2" />
             </div>
           </div>
           <div>

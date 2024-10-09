@@ -1,47 +1,58 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { IoSearch } from "react-icons/io5";
 import OtherUsers from './OtherUsers';
 import toast from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthUser, setOtherUsers } from '../redux/userSlice';
-import {BASE_URL} from "../config"
-
+import { setAuthUser, setOtherUsers, setSelectedUser } from '../redux/userSlice';
+import { BASE_URL } from "../config";
 
 const Sidebar = () => {
-  const {otherUsers}=useSelector(store=>store.user);
-  const dispatch=useDispatch();
-  const[search,setSearch]=useState("");
-    const navigate =useNavigate();
+  const { otherUsers } = useSelector(store => store.user);
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
-    const logoutHandler=async()=>{
-        try {
-            const res=await axios.get(`${BASE_URL}/user/logout`);
-            navigate("/login");
-            
-            toast.success(res.data.message);
-            dispatch(setAuthUser(null))
-        } catch (error) {
-            console.log(error);
-        }
-    }
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/user/logout`);
+      navigate("/login");
 
-    const searchSubmitHandler=(e)=>{
-      e.preventDefault();
-      const conversationUser=otherUsers?.find((user)=>user?.fullName?.toLowerCase().includes(search.toLowerCase()));
-      if(conversationUser){
-        dispatch(setOtherUsers([conversationUser]));
-      }else{
-        toast.error("User not found");
-      }
+      toast.success(res.data.message);
+      dispatch(setAuthUser(null));
+      dispatch(setSelectedUser(null));  
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+    const conversationUser = otherUsers?.find((user) => 
+      user?.fullName?.toLowerCase().includes(search.toLowerCase())
+    );
+    
+    if (conversationUser) {
+      dispatch(setOtherUsers([conversationUser]));
+    } else {
+      toast.error("User not found");
+    }
+  };
 
   return (
     <div className='border-r border-slate-500 p-4 flex flex-col'>
       <form onSubmit={searchSubmitHandler} action="" className='flex items-center gap-2'>
-        <input value={search} onChange={(e)=>setSearch(e.target.value)} className='input input-bordered rounded-md' type="text" placeholder='Search...'/>
-        <button type='submit' className='btn btn-circle bg-slate-500'><IoSearch /></button>
+        <input 
+          value={search} 
+          onChange={(e) => setSearch(e.target.value)} 
+          className='input input-bordered rounded-md' 
+          type="text" 
+          placeholder='Search...'
+        />
+        <button type='submit' className='btn btn-circle bg-slate-500'>
+          <IoSearch />
+        </button>
       </form>
       <div className='divider px-3'></div>
       <OtherUsers/>
@@ -49,7 +60,7 @@ const Sidebar = () => {
         <button onClick={logoutHandler} className='btn btn-sm'>Logout</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

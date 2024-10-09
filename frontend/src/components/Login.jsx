@@ -27,7 +27,7 @@ function Signup() {
       
     
       if(res?.data?.success==true){
-      navigate("/");
+      navigate("/home");
       toast.success(res?.data?.message)
       dispatch(setAuthUser(res?.data?.data))
       }
